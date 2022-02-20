@@ -1,4 +1,4 @@
-# Movie App
+# Moviebloom
 
 ## Team Members
 > Lipika Baniya, 6138108
