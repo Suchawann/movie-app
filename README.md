@@ -3,7 +3,7 @@
 ## Team Members
 > Lipika Baniya, 6138108
 
-> Suchuwan Chaiworn, 6135102
+> Suchawan Chaiworn, 6135102
 
 > Paranan V., 6135118
 
