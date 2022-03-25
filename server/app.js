@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var newsRouter = require('./routes/news');
 var movieRouter = require('./routes/movie');
+
 var app = express();
 
 app.use(cors());

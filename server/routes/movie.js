@@ -4,19 +4,6 @@ const multer = require("multer");
 const mongoose = require("mongoose");
 var Movie = require("../db/models/movie");
 
-
-// const storage = multer.diskStorage({
-//   destination: function(req,file,callback){
-//     callback(null,"../images")
-//   },
-//   filename: (req, file, callback) => {
-//     callback(null, file.originalname);
-//   }
-// });
-
-
-//let upload = multer({storage:storage});
-
 /* GET news listing. */
 router.get("/", (req, res, next) => {
   Movie.find({}, (err, result) => {
@@ -39,11 +26,11 @@ router.post("/",(req, res, next) => {
 //   const day = dateObj.getUTCDate();
 //   const year = dateObj.getUTCFullYear();
   const movie1 = new Movie({
-    img: data.img,
+    image: data.image,
     title:data.title,
-    synopsis: data.desc,
+    synopsis: data.synopsis,
     actor: data.actor,
-    movieLength: data.time
+    min: data.min
 
   
   });

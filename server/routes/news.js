@@ -25,12 +25,12 @@ router.post("/", (req, res, next) => {
   const day = dateObj.getUTCDate();
   const year = dateObj.getUTCFullYear();
   const news1 = new News({
-    img: data.img,
-    title:data.title,
-    desc: data.desc,
+    img   : data.img,
+    title : data.title,
+    desc  : data.desc,
     author: data.author,
-    date :  year + "/" + month + "/" + day,
-    time : data.time
+    date  : year + "/" + month + "/" + day,
+    time  : data.time
   });
   news1.save((err, newInstance) => {
     if (err) {
@@ -63,7 +63,6 @@ router.put("/", async (req, res, next) => {
   delete data._id;
   console.debug(data);
 
-
   News.findByIdAndUpdate(id,data, (err,doc) => {
     if (err) {
       console.error("Hey look, Error!", err);
@@ -74,5 +73,6 @@ router.put("/", async (req, res, next) => {
 
   });
 });
+
 
 module.exports = router;
