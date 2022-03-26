@@ -1,7 +1,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Navbar, Nav, Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
-import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImage, MDBBtn, MDBRipple } from 'mdb-react-ui-kit';
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImage, MDBBtn, MDBRipple, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 
 import { FaPlus, FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
 import axios from 'axios'
@@ -81,6 +81,7 @@ export default function Home() {
         }
     };
     const handleUpload = () => {
+      
         const uploadTask = storage.ref(`images/${fileName.name}`).put(fileName);
         uploadTask.on(
           "state_changed",
@@ -101,10 +102,11 @@ export default function Home() {
               .then(url => {
                 setUrl(url);
                 // var src = URL.createObjectURL(url);
+              
                 if (model) {
                     //Add new news
                     const newMovie = {
-                        image: Url,
+                        image: url,
                         title: refTitle.current.value,
                         synopsis: refSysnopsis.current.value,
                         actor: refActor.current.value,
@@ -143,11 +145,12 @@ export default function Home() {
                             setMovie(movie)
                             handleClose();
                         });
+                        
                 } else {
                     // Update product
                     const updatedMovie = {
                         _id: movieList._id,
-                        image: url,
+                        image:movieList.image.getDownloadURL(),
                         title: refTitle.current.value,
                         synopsis: refSysnopsis.current.value,
                         actor: refActor.current.value,
@@ -182,13 +185,20 @@ export default function Home() {
                     
                             setMovie(movie)
                             handleClose();
-                        });
+                                  });
                 }
+           
                 //handleFormAction()
                 console.log(url)
-              });
+              }
+            )
           }
         );
+
+                
+        
+
+        
       };
 
     // const handleFormAction = () => {
@@ -333,7 +343,7 @@ export default function Home() {
                                 <Row>
                                     <Col>Image</Col>
                                     <Col >
-                                        <input type="file" name="img" onChange={handlePhoto} ref={refImage}  />
+                                        <input type="file" name="img" onChange={handlePhoto}   />
                                        {/* <img src={url}></img> */}
                                         {/* <button onClick={handleUpload}>Upload</button> */}
                                     </Col>
@@ -380,8 +390,9 @@ export default function Home() {
                         </Modal.Footer>
 
                     </Modal>
-
-                <MDBCard style={{ maxWidth: '22rem', borderRadius:"10px" }} >
+                    <MDBRow>
+      <MDBCol sm='6'>
+                <MDBCard style={{ maxWidth: '22rem', borderRadius:"10px", paddingBottom:"20px", marginLeft:"75%" }} >
                     {movie.map((movies) => (
 
                 <><MDBRipple rippleColor='light' rippleTag='div' className='bg-image hover-overlay'>
@@ -389,17 +400,26 @@ export default function Home() {
                             <a>
                                 <div className='mask' style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
                             </a>
-                        </MDBRipple><MDBCardBody style={{ boxShadow: "1px 1px 1px 1px #888888", borderRadius: "0 0 10px 10px" }}>
+                        </MDBRipple><MDBCardBody style={{ boxShadow: "1px 1px 1px 1px #888888", borderRadius: "0 0 10px 10px", marginBottom:"20px" }}>
                                 <MDBCardTitle>{movies.title}</MDBCardTitle>
-                                <MDBCardText>
+                                <MDBCardText style={{fontSize:"14px", color:"#0009", fontWeight:"bold"}}>
+                                    Lead Actor: {movies.actor}
+                                </MDBCardText><br></br>
+                                
+                                <MDBCardText style={{fontSize:"12px"}}>
                                     {movies.synopsis}
-                                </MDBCardText>
+                                </MDBCardText><br></br>
+                                <MDBCardText style={{fontSize:"12px",color:"#0009", fontWeight:"bold"}}>
+                                    Movie length: {movies.min} mins
+                                </MDBCardText><br></br>
                                 <FaPencilAlt onClick={() => handleUpdate(movies)} />
                                 <FaTrashAlt onClick={() => handleDelete(movies)} />
                             </MDBCardBody></>
   
                         ))}
                 </MDBCard>
+                </MDBCol>
+                </MDBRow>
                     
                     
 
