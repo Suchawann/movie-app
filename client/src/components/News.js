@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Row, Col, Button, Form, Modal, Card } from "react-bootstrap";
+import { Navbar, Nav, Container, Row, Col, Button, Form, Modal, Card } from "react-bootstrap";
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImage, MDBBtn, MDBRipple } from 'mdb-react-ui-kit';
 import { FaPlus, FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
 import '../App.css'
@@ -65,7 +65,7 @@ export default function News() {
     const handleClose = () => {
         setModeAdd(false);
         setShow(false);
-        window.location.reload(true)
+        window.location.reload(true);
     };
 
     const handleShow = () => setShow(true);

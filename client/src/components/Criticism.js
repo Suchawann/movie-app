@@ -62,6 +62,7 @@ function Criticism ()  {
     const handleClose = () => {
         setModeAdd(false);
         setShow(false);
+        window.location.reload(true);
     };
 
     const handleShow = () => setShow(true);
@@ -276,11 +277,12 @@ function Criticism ()  {
                     <MDBCard>
                     <MDBCardBody className="row" key={reviews._id}>
                         <MDBCardImage className="col-md-4 wrapthumbnail" src={reviews.img}  style={{ objectFit: "cover", borderRadius: "10px 10px 0 0"}} fluid alt='...'/>
+                        {/* <MDBCardImage src={newspaper.img} fluid alt='...' /> */}
                         <div className="col-md-6" >
                             <div className="card-block">
                                 <h3>{reviews.title}</h3>
                                 <h1 className="card-text">{reviews.content}</h1>
-                                <h1 className="author-card">By {reviews.author}</h1>
+                                <h1 className="author-card"> By {reviews.author}</h1>
                                 <h1 className="author-card">{reviews.publicationDate}</h1>
                                 <FaPencilAlt onClick={() => handleUpdate(reviews) } />
                                 <FaTrashAlt onClick={() => handleDelete(reviews)} />

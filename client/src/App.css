@@ -252,6 +252,7 @@ License: https://www.wowthemes.net/freebies-license/
     font-size: 14px;
     color: #8f8e8e;
     margin-bottom: 25px;
+    display: contents;
   }
 }
 
@@ -264,6 +265,20 @@ License: https://www.wowthemes.net/freebies-license/
 
   }
   
+}
+.add-button{
+  margin-top: 20px;
+  /* align-content: flex-end; */
+  text-align: center;
+}
+.btn-outline-secondary:hover {
+  color: #fff;
+  background-color: #004785;
+  border-color: #00498a;
+}
+.btn-outline-secondary {
+  color: #00498a;
+  border-color: #00498a;
 }
 
 
