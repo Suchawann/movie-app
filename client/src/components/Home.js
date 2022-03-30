@@ -9,7 +9,7 @@ import { useMediaQuery } from 'react-responsive'
 import { storage } from "../firebase";
 
 export default function Home() {
-    const API_URL = "http://localhost:3000";
+    const API_URL =  process.env.REACT_APP_API_URL;
 
     const [show, setShow] = useState(false);
     const [model, setModel] = useState(false);
