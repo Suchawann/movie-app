@@ -4,14 +4,18 @@ import { Navbar, Nav, Container, Row, Col, Button, Form, Modal } from "react-boo
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImage, MDBBtn, MDBRipple, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 
 import { FaPlus, FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
+import {BsFillArrowRightCircleFill } from 'react-icons/bs';
+
 import axios from 'axios'
 import { useMediaQuery } from 'react-responsive'
 import { storage } from "../firebase";
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
     const API_URL =  process.env.REACT_APP_API_URL;
-
     const [show, setShow] = useState(false);
+    const [showN, setShowN] = useState(false);
     const [model, setModel] = useState(false);
     const [movie, setMovie] = useState([])
     const [rows, setRows] = useState([])
@@ -62,9 +66,12 @@ export default function Home() {
     const handleClose = () => {
         setModel(false);
         setShow(false);
+        window.location.reload(true);  
     };
+ 
 
     const handleShow = () => setShow(true);
+  
 
     const handleDelete = (movie) => {
         console.log(movie);
@@ -201,92 +208,8 @@ export default function Home() {
         
       };
 
-    // const handleFormAction = () => {
-    //     if (model) {
-    //         //Add new news
-    //         const newMovie = {
-    //             img: Url,
-    //             title: refTitle.current.value,
-    //             synopsis: refDesc.current.value,
-    //             actor: refActor.current.value,
-                
-    //             min: refTime.current.value
-    //         }
-    //         console.log(newMovie);
-    // //         axios.post(`${API_URL}/movie`, { newMovie })
-    // //   .then(res => {
-    // //     console.log(res);
-    // //     console.log(res.data);
-    // //     movie.push(res);
-    // //                 setMovie(movie)
-    // //                 handleClose();
-    // //   })
+    
 
-    //         fetch(`${API_URL}/movie`, {
-    //             method: "POST", // *GET, POST, PUT, DELETE, etc.
-    //             mode: "cors", // no-cors, *cors, same-origin
-    //             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    //             // credentials: "same-origin", // include, *same-origin, omit
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 // "Content-Type":"multipart/form-data"
-    //                 // 'Content-Type': 'application/x-www-form-urlencoded',
-    //             },
-    //             redirect: "follow", // manual, *follow, error
-    //             referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    //             body: JSON.stringify(newMovie), // body data type must match "Content-Type" header
-
-    //         })
-    //             .then((res) => res.json())
-    //             .then((json) => {
-    //                 // Successfully added the product
-    //                 console.log("POST Result", json);
-    //                 movie.push(json);
-    //                 setMovie(movie)
-    //                 handleClose();
-    //             });
-    //     } else {
-    //         // Update product
-    //         const updatedMovie = {
-    //             _id: movieList._id,
-    //             img: movieList.url,
-    //             title: refTitle.current.value,
-    //             synopsis: refDesc.current.value,
-    //             actor: refActor.current.value,
-    //             min: refTime.current.value
-    //         };
-    //         console.log(updatedMovie);
-
-    //         fetch(`${API_URL}/movie`, {
-    //             method: "PUT", // *GET, POST, PUT, DELETE, etc.
-    //             mode: "cors", // no-cors, *cors, same-origin
-    //             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    //             // credentials: "same-origin", // include, *same-origin, omit
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 // 'Content-Type': 'application/x-www-form-urlencoded',
-    //             },
-    //             redirect: "follow", // manual, *follow, error
-    //             referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    //             body: JSON.stringify(updatedMovie), // body data type must match "Content-Type" header
-    //         })
-    //             .then((res) => res.json())
-    //             .then((json) => {
-    //                 // Successfully updated the product
-    //                 console.log("PUT Result", json);
-    //                 for (let i = 0; i < movie.length; i++) {
-    //                     if (movie[i]._id === updatedMovie._id) {
-    //                         console.log(movie[i], updatedMovie);
-    //                         movie[i] = updatedMovie;
-    //                         break;
-    //                     }
-    //                 }
-            
-    //                 setMovie(movie)
-    //                 handleClose();
-    //             });
-    //     }
-    // }
 
 
     return (
@@ -327,7 +250,7 @@ export default function Home() {
                     >
                         <Modal.Header closeButton>
                             <Modal.Title>
-                            {model ? "Add New News" : "Update News"}
+                            {model ? "Add New Movies" : "Update Movies"}
                             </Modal.Title>
                         </Modal.Header>
 
@@ -390,7 +313,7 @@ export default function Home() {
                         </Modal.Footer>
 
                     </Modal>
-                    <MDBRow>
+                    {/* <MDBRow>
       <MDBCol sm='6'>
                 <MDBCard style={{ maxWidth: '22rem', borderRadius:"10px", paddingBottom:"20px", marginLeft:"75%" }} >
                     {movie.map((movies) => (
@@ -419,7 +342,57 @@ export default function Home() {
                         ))}
                 </MDBCard>
                 </MDBCol>
-                </MDBRow>
+                </MDBRow> */}
+                <div className="Home">
+                {movie.map((movies) => (
+
+<div className="FilmCard" key={movies._id} style={{ backgroundImage: `url(${movies.image})`,
+    backgroundSize: 'cover',}}>
+        {/* <BsFillArrowRightCircleFill  className="CircleArrow"onClick={handleShowN} />
+        <Modal
+        show={showN}
+        onHide={handleCloseN}
+        backdrop="static"
+        keyboard={false}
+        key={movies._id}
+       
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>{movies.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <img src={movies.image} style={{width:"200px"}}></img>
+           <div> Synopsis: {movies.synopsis}</div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseN}>
+            Close
+          </Button>
+          
+        </Modal.Footer>
+      </Modal> */}
+        <div className="FilmDescription">
+          <div className="title">{movies.title}</div>
+          <div className="min">{movies.min} mins</div>
+          
+
+        </div>
+        <div className="FilmDescription2">
+          <div className="synopsis">{movies.synopsis}</div>
+          <div className="actor">{movies.actor} mins</div>
+          
+          <FaPencilAlt onClick={() => handleUpdate(movies)} style={{color:'#fff'}} />
+        <FaTrashAlt onClick={() => handleDelete(movies)} style={{color:'#fff'}} />
+        </div>
+        
+      </div>
+   
+      
+      
+
+))}
+</div>
+    
                     
                     
 
@@ -431,98 +404,3 @@ export default function Home() {
 
 
 }
-
-// const handleUpdate = (news) => {
-//     console.log("Update News", news);
-//     console.log(refTitle);
-//     refTitle.current = news.title;
-
-//     setShow(true);
-//     setMovieNews(news);
-// };
-
-
-
-{/* <div className="card">
-			    <div className="row">
-                    <div className="col-md-4 wrapthumbnail">
-                        <a><img className='img-size' src={Look}/></a>
-                    </div>
-                    <div className="col-md-6">
-                        <div clasName="card-block">
-                            <h3><a>Can Works Like "Don’t Look Up" Get Us Out of Our Heads?</a></h3>
-                            <h1 className="card-text">In the doomsday smash and Bo Burnham’s pandemic musical “Inside,” themes of climate change, digital distraction and inequality merge and hit home.</h1>
-                            <h1 className="author-card"><a href="author.html"> By Maya Salam</a></h1>
-                            <h1 className="author-card">23 Jan 2022 | 8 mins read </h1> 
-                        </div>
-                    </div>
-			    </div>
-		    </div> */}
-
-{/* <div className="card">
-			    <div className="row">
-                    <div className="col-md-4 wrapthumbnail">
-                        <a><img className='img-size' src={Tinder}/></a>
-                    </div>
-                    <div className="col-md-6">
-                        <div className="card-block">
-                            <h3><a>Where Is Simon Leviev From The Tinder Swindler Now?</a></h3>
-                            <h1 className="card-text">Simon Leviev is no longer on Tinder, but he is a free man. Here's what he's been up to since the release of Netflix's true-crime documentary</h1>
-                            <h1 className="author-card"><a href="author.html"> By Kelsie Gibson</a></h1>
-                            <h1 className="author-card">01 Mar 2022 | 8 mins read </h1> 
-                        </div>
-                    </div>
-			    </div>
-		    </div>
-
-            <div className="card">
-                <div className="row">
-                    <div className="col-md-4 wrapthumbnail">
-                        <a><img className='img-size' src={ThirtyNine}/></a>
-                    </div>
-                    <div className="col-md-6">
-                        <div className="card-block">
-                            <h3><a>“Thirty-Nine” To Go On Hiatus Next Week</a></h3>
-                            <h1 className="card-text">On March 4, JTBC officially announced that the drama starring Son Ye Jin, Jeon Mi Do, and Kim Ji Hyun would be going on a one-week hiatus due to coverage of South Korea’s presidential election.</h1>
-                            <h1 className="author-card"><a href="author.html"> By E Cha</a></h1>
-                            <h1 className="author-card">04 Mar 2022 | 8 mins read </h1> 
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-
-
-    // useEffect(() => {
-    //     fetch(`${API_URL}`)
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             const rows = data.map((e, i) => {
-    //                 return (
-    //                     <tr key={i}>
-    //                         <td>
-    //                             <FaPencilAlt
-    //                                 onClick={() => {
-    //                                     handleUpdate(e);
-    //                                 }}
-    //                             />
-    //                             &nbsp;
-    //                             <FaTrashAlt
-    //                                 onClick={() => {
-    //                                     handleDelete(e);
-    //                                 }}
-    //                             />
-    //                         </td>
-    //                         <td>{e.title}</td>
-    //                         <td>{e.desc}</td>
-    //                         <td>{e.image}</td>
-    //                         <td>{e.author}</td>
-    //                         <td>{e.time}</td>
-    //                         <td>{e.date}</td>
-    //                     </tr>
-    //                 );
-    //             });
-    //             setNews(data);
-    //             setNewsRows(rows);
-    //         });
-    // }, []);
-

@@ -8,7 +8,7 @@ import axios from 'axios'
 import { storage } from "../firebase";
 
 export default function News() {
-    const API_URL = process.env.REACT_APP_API_URL;
+    const API_URL =  process.env.REACT_APP_API_URL;
 
     const [show, setShow] = useState(false);
     const [modeAdd, setModeAdd] = useState(false);
