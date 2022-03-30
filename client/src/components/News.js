@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Navbar, Nav, Container, Row, Col, Button, Form, Modal, Card } from "react-bootstrap";
+import { Row, Col, Button, Form, Modal, Card } from "react-bootstrap";
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImage, MDBBtn, MDBRipple } from 'mdb-react-ui-kit';
 import { FaPlus, FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
 import '../App.css'
@@ -65,6 +65,7 @@ export default function News() {
     const handleClose = () => {
         setModeAdd(false);
         setShow(false);
+        window.location.reload(true)
     };
 
     const handleShow = () => setShow(true);
@@ -303,7 +304,7 @@ export default function News() {
                                         <div className="card-block">
                                             <h3>{newspaper.title}</h3>
                                             <h1 className="card-text">{newspaper.desc}</h1>
-                                            <h1 className="author-card"><a href="author.html"> By {newspaper.author}</a></h1>
+                                            <h1 className="author-card">By {newspaper.author}</h1>
                                             <h1 className="author-card">{newspaper.date} |  {newspaper.time} </h1>
                                             <FaPencilAlt onClick={() => handleUpdate(newspaper) } />
                                             <FaTrashAlt onClick={() => handleDelete(newspaper)} />
