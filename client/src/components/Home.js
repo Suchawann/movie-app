@@ -157,7 +157,7 @@ export default function Home() {
                     // Update product
                     const updatedMovie = {
                         _id: movieList._id,
-                        image:movieList.image.getDownloadURL(),
+                        image:url,
                         title: refTitle.current.value,
                         synopsis: refSysnopsis.current.value,
                         actor: refActor.current.value,
